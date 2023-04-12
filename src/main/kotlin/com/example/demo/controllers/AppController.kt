@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.server.ResponseStatusException
 
-
 @Controller
 class AppController(private val repository: ArticleRepository) {
 
@@ -27,9 +26,9 @@ class AppController(private val repository: ArticleRepository) {
     @GetMapping("/article/{slug}")
     fun article(@PathVariable slug: String, model: Model): String {
         val article = repository
-                .findBySlug(slug)
-                ?.render()
-                ?: throw ResponseStatusException(HttpStatus.NOT_FOUND, "This article does not exist")
+            .findBySlug(slug)
+            ?.render()
+            ?: throw ResponseStatusException(HttpStatus.NOT_FOUND, "This article does not exist")
 
         model["title"] = article.title
         model["article"] = article
@@ -38,20 +37,20 @@ class AppController(private val repository: ArticleRepository) {
     }
 
     fun Article.render() = RenderedArticle(
-            slug,
-            title,
-            headline,
-            content,
-            author,
-            addedAt.format()
+        slug,
+        title,
+        headline,
+        content,
+        author,
+        addedAt.format(),
     )
 
     data class RenderedArticle(
-            val slug: String,
-            val title: String,
-            val headline: String,
-            val content: String,
-            val author: User,
-            val addedAt: String,
+        val slug: String,
+        val title: String,
+        val headline: String,
+        val content: String,
+        val author: User,
+        val addedAt: String,
     )
 }
