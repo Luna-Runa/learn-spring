@@ -8,6 +8,7 @@ plugins {
     kotlin("plugin.jpa") version "1.7.22"
     kotlin("plugin.allopen") version "1.7.22"
     id("org.jlleitschuh.gradle.ktlint") version "11.3.1"
+    kotlin("kapt") version "1.8.20"
 }
 
 allOpen {
@@ -38,6 +39,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
     testImplementation("com.ninja-squad:springmockk:4.0.2")
+    kapt("org.springframework.boot:spring-boot-configuration-processor")
 }
 
 tasks.withType<KotlinCompile> {

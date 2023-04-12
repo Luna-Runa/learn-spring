@@ -12,7 +12,7 @@ import org.springframework.web.server.ResponseStatusException
 @RequestMapping("/api/user")
 class UserController(private val userService: UserService) {
 
-    @GetMapping("/")
+    @GetMapping()
     fun findAll() = userService.findAll()
 
     @GetMapping("/{login}")
