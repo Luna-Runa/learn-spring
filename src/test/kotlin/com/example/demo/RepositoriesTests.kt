@@ -47,4 +47,24 @@ class RepositoriesTests @Autowired constructor(
         // then
         assertThat(user).isEqualTo(johnDoe)
     }
+
+    @Test
+    fun `슬러그나 컨텐츠가 일치하면 반환`() {
+        // given
+        val johnDoe = User("johnDoe", "John", "Doe")
+        entityManager.persist(johnDoe)
+        val article = Article("Lorem", "Lorem", "dolor sit amet", johnDoe)
+        entityManager.persist(article)
+        entityManager.flush()
+
+        // when
+        val foundByContent = articleRepository.findByContentOrSlug(article.content, "not")
+        val foundBySlug = articleRepository.findByContentOrSlug("not", article.slug)
+        val notFound = articleRepository.findByContentOrSlug("not", "not")
+
+        // then
+        assertThat(foundByContent).isEqualTo(article)
+        assertThat(foundBySlug).isEqualTo(article)
+        assertThat(notFound).isEqualTo(null)
+    }
 }
