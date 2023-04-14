@@ -7,6 +7,7 @@ plugins {
     kotlin("plugin.spring") version "1.7.22"
     kotlin("plugin.jpa") version "1.7.22"
     kotlin("plugin.allopen") version "1.7.22"
+    kotlin("plugin.noarg") version "1.7.22"
     id("org.jlleitschuh.gradle.ktlint") version "11.3.1"
     kotlin("kapt") version "1.8.20"
 }
@@ -40,6 +41,8 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
     testImplementation("com.ninja-squad:springmockk:4.0.2")
     kapt("org.springframework.boot:spring-boot-configuration-processor")
+    runtimeOnly("mysql:mysql-connector-java:8.0.28")
+    implementation("io.github.microutils:kotlin-logging:1.12.5")
 }
 
 tasks.withType<KotlinCompile> {

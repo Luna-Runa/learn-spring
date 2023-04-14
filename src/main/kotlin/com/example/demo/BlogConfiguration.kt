@@ -13,6 +13,8 @@ class BlogConfiguration {
 
     @Bean
     fun databaseInitializer(userRepository: UserRepository, articleRepository: ArticleRepository) = ApplicationRunner {
+        if (userRepository.existsByLogin("johnDoe")) return@ApplicationRunner
+
         val johnDoe = userRepository.save(User("johnDoe", "John", "Doe"))
         articleRepository.save(
             Article(
